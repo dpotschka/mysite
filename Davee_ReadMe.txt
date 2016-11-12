@@ -1,3 +1,7 @@
+﻿Test sending to githup then pa. fromlocal success.
+ Now editing online at github.com, will pull from pa now.
+ 
+ 
 DAvee Read these for setting up your website connections etc.
 
 All the stuff in the file is from the tutorial:
