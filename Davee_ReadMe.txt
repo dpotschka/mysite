@@ -1,3 +1,4 @@
+﻿Test sending to githup then pa. fromlocal
 DAvee Read these for setting up your website connections etc.
 
 All the stuff in the file is from the tutorial:
