@@ -530,7 +530,16 @@ and
 git log
 
 
+Committer: timetable <timetable@24dcaea7d349>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
 
+20:56 ~/mysite (master)$ git config --global user.name "timetable"
+20:58 ~/mysite (master)$ git config --global user.email dpotschka@yahoo.com
+20:59 ~/mysite (master)$
 --------------------------- End 17 Git stuff
 
 
