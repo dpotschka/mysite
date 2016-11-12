@@ -1,11 +1,4 @@
-Test sending to githup then pa. fromlocal success.
- Now editing online at github.com, will pull from pa now.
-Be sure to commit before sending or when you come back here
-nothing will have changed, but it will be different at github.
-now commit. and then send back to github then to local.
-
-And editing online at github, you can also edit on local githyp from here.
-
+﻿
 DAvee Read these for setting up your website connections etc.
 
 All the stuff in the file is from the tutorial:
@@ -473,16 +466,16 @@ To get your PA files on your local machine you have to push them to
 github first (use PA bash),  You may have to pull the github files
 to PA first to integrate the two repos.
 
-https://github.com/dpotschka/mysite
-
 then you can pull them from github to your local directory using
 your local bash.
 cd into your local directory first.
 
+Always commit any changes before pushing or pulling.
+
 Me on github:
 https://github.com/dpotschka/mysite
 
-Me on pythonAnyWhere:
+Me on pythonAnyWhere (pa):
 https://www.pythonanywhere.com/user/timetable/files/home/timetable/mysite
 
 Me on my local machine:
@@ -504,18 +497,20 @@ to add files or directory:
 git add mysite/
 then
 git commit
-To exit a message while doing a "git commit":
+To exit (for pa) a message while doing a "git commit":
 hit <esc>
-then
+then 
 :wq and the commit will happen.
 
-I think you can also do this after editing a file:
+To exit a message on local just save the message then close the editor.
+
+You can also do:
 git commit <file name>
-Then you don't have to do the git add file thing.
+
 
 More useful commands:
 Use the https if you don't have ssh,
-free accounts don't have ssh.
+free accounts at pa don't have ssh.
 
 Use this when pushing to github.com from local.
 git push --set-upstream https://github.com/dpotschka/mysite master
@@ -523,8 +518,8 @@ git push --set-upstream https://github.com/dpotschka/mysite master
 git clone <repo URL from GitHub>
 cd into the newly-cloned directory.
 git diff
-git push
-git pull
+git push  <url>
+git pull  <url>
 
 for debugging
 git branch -a
@@ -542,6 +537,9 @@ You can suppress this message by setting them explicitly:
 20:56 ~/mysite (master)$ git config --global user.name "timetable"
 20:58 ~/mysite (master)$ git config --global user.email dpotschka@yahoo.com
 20:59 ~/mysite (master)$
+
+
+
 --------------------------- End 17 Git stuff
 
 
