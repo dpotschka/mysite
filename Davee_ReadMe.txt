@@ -4,6 +4,8 @@ Be sure to commit before sending or when you come back here
 nothing will have changed, but it will be different at github.
 now commit. and then send back to github then to local.
 
+And editing online at github, you can also edit on local githyp from here.
+
 DAvee Read these for setting up your website connections etc.
 
 All the stuff in the file is from the tutorial:
