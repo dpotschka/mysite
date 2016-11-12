@@ -492,7 +492,7 @@ git init
 Get repository (repo) setup here and a lot more:
 http://www.njedesign.com/github-basic-commands-for-creating-and-pushing-to-repository/
 
-to add files:
+to add files or directory:
 git add mysite/
 then
 git commit
@@ -501,9 +501,16 @@ hit <esc>
 then
 :wq and the commit will happen.
 
+I think you can also do this after editing a file:
+git commit <file name>
+Then you don't have to do the git add file thing.
+
 More useful commands:
 Use the https if you don't have ssh,
 free accounts don't have ssh.
+
+Use this when pushing to github.com from local.
+git push --set-upstream https://github.com/dpotschka/mysite master
 
 git clone <repo URL from GitHub>
 cd into the newly-cloned directory.
