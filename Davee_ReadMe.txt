@@ -1,9 +1,23 @@
+<<<<<<< HEAD
 
+=======
+﻿
+Davee Read these for setting up your website connections etc.
+>>>>>>> ca9d41451e362ae6001b29f7f1eb71bee5c1f287
 
-DAvee Read these for setting up your website connections etc.
+All the stuff in the file is from the tutorials:
 
-All the stuff in the file is from the tutorial:
+This one is for setting up deploy on pa and use in conjuction with the
+one below.
+pythonAnywhere Django docs.
+https://help.pythonanywhere.com/pages/FollowingTheDjangoTutorial
+
+This one is for setting up locally.
+Official Django website docs.
 https://docs.djangoproject.com/en/1.10/intro/tutorial01/
+
+--
+
 
 
 
@@ -140,8 +154,11 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 In:
 /timetable/mysite/mysite/settings.py
 
-set
+For production set
 ALLOWED_HOSTS = ["timetable.pythonanywhere.com"]
+
+To run locally you need leave it blank:
+ALLOWED_HOSTS = []
 
 and watch out for this:
 
@@ -186,6 +203,17 @@ This is already set for you:
 
 STATIC_URL = '/static/'
 
+See 15 below for more on these two and media files, but this is all you need for now.
+
+These get your javascrit, image, css, and fonts files. 
+# Production:
+STATIC_ROOT = '/home/timetable/mysite/myPolls/static'
+
+# Local:
+STATIC_ROOT = 'c:/Daves_Python_Programs/pythonAnyWhere/mysite/myPolls/static'
+
+
+
 
 ---- End 5
 
@@ -213,6 +241,10 @@ That is your second wsgi pointer (see 2 above).
 
 set
 path = '/home/timetable/mysite'
+
+# For local.
+path = 'c:/Daves_Python_Programs/pythonAnyWhere/mysite'
+
 
 set
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
@@ -385,7 +417,13 @@ The STATIC_ROOT variable in settings.py defines the single folder
 you want to collect all your static files into. Typically, this
 would be a top-level folder inside your project, eg:
 
+
+# Local:
+STATIC_ROOT = 'c:/Daves_Python_Programs/pythonAnyWhere/mysite/myPolls/static'
+
+# Production:
 STATIC_ROOT = "/home/myusername/myproject/static"
+
 # or, eg,
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 The important thing is this needs to be the full, absolute path
@@ -469,16 +507,16 @@ To get your PA files on your local machine you have to push them to
 github first (use PA bash),  You may have to pull the github files
 to PA first to integrate the two repos.
 
-https://github.com/dpotschka/mysite
-
 then you can pull them from github to your local directory using
 your local bash.
 cd into your local directory first.
 
+Always commit any changes before pushing or pulling.
+
 Me on github:
 https://github.com/dpotschka/mysite
 
-Me on pythonAnyWhere:
+Me on pythonAnyWhere (pa):
 https://www.pythonanywhere.com/user/timetable/files/home/timetable/mysite
 
 Me on my local machine:
@@ -500,18 +538,20 @@ to add files or directory:
 git add mysite/
 then
 git commit
-To exit a message while doing a "git commit":
+To exit (for pa) a message while doing a "git commit":
 hit <esc>
-then
+then 
 :wq and the commit will happen.
 
-I think you can also do this after editing a file:
+To exit a message on local just save the message then close the FILE THEN close the editor.
+
+You can also do:
 git commit <file name>
-Then you don't have to do the git add file thing.
+
 
 More useful commands:
 Use the https if you don't have ssh,
-free accounts don't have ssh.
+free accounts at pa don't have ssh.
 
 Use this when pushing to github.com from local.
 git push --set-upstream https://github.com/dpotschka/mysite master
@@ -519,8 +559,8 @@ git push --set-upstream https://github.com/dpotschka/mysite master
 git clone <repo URL from GitHub>
 cd into the newly-cloned directory.
 git diff
-git push
-git pull
+git push  <url>
+git pull  <url>
 
 for debugging
 git branch -a
@@ -538,6 +578,9 @@ You can suppress this message by setting them explicitly:
 20:56 ~/mysite (master)$ git config --global user.name "timetable"
 20:58 ~/mysite (master)$ git config --global user.email dpotschka@yahoo.com
 20:59 ~/mysite (master)$
+
+
+
 --------------------------- End 17 Git stuff
 
 

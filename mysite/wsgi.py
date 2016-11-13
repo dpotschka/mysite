@@ -10,7 +10,11 @@ https://docs.djangoproject.com/en/1.10/howto/deployment/wsgi/
 import os
 import sys
 
-path = '/home/timetable/mysite'
+# For local.
+path = 'C:/Daves_Python_Programs/pythonAnyWhere/mysite'
+
+# For deploy on pa.
+#path = '/home/timetable/mysite'
 
 if path not in sys.path:
     sys.path.append(path)
