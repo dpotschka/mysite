@@ -1,8 +1,19 @@
 ﻿
-DAvee Read these for setting up your website connections etc.
+Davee Read these for setting up your website connections etc.
 
-All the stuff in the file is from the tutorial:
+All the stuff in the file is from the tutorials:
+
+This one is for setting up deploy on pa and use in conjuction with the
+one below.
+pythonAnywhere Django docs.
+https://help.pythonanywhere.com/pages/FollowingTheDjangoTutorial
+
+This one is for setting up locally.
+Official Django website docs.
 https://docs.djangoproject.com/en/1.10/intro/tutorial01/
+
+--
+
 
 
 1.
@@ -137,8 +148,11 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 In:
 /timetable/mysite/mysite/settings.py
 
-set
+For production set
 ALLOWED_HOSTS = ["timetable.pythonanywhere.com"]
+
+To run locally you need leave it blank:
+ALLOWED_HOSTS = []
 
 and watch out for this:
 
@@ -183,6 +197,17 @@ This is already set for you:
 
 STATIC_URL = '/static/'
 
+See 15 below for more on these two and media files, but this is all you need for now.
+
+These get your javascrit, image, css, and fonts files. 
+# Production:
+STATIC_ROOT = '/home/timetable/mysite/myPolls/static'
+
+# Local:
+STATIC_ROOT = 'c:/Daves_Python_Programs/pythonAnyWhere/mysite/myPolls/static'
+
+
+
 
 ---- End 5
 
@@ -210,6 +235,10 @@ That is your second wsgi pointer (see 2 above).
 
 set
 path = '/home/timetable/mysite'
+
+# For local.
+path = 'c:/Daves_Python_Programs/pythonAnyWhere/mysite'
+
 
 set
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
@@ -382,7 +411,13 @@ The STATIC_ROOT variable in settings.py defines the single folder
 you want to collect all your static files into. Typically, this
 would be a top-level folder inside your project, eg:
 
+
+# Local:
+STATIC_ROOT = 'c:/Daves_Python_Programs/pythonAnyWhere/mysite/myPolls/static'
+
+# Production:
 STATIC_ROOT = "/home/myusername/myproject/static"
+
 # or, eg,
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 The important thing is this needs to be the full, absolute path
@@ -502,7 +537,7 @@ hit <esc>
 then 
 :wq and the commit will happen.
 
-To exit a message on local just save the message then close the editor.
+To exit a message on local just save the message then close the FILE THEN close the editor.
 
 You can also do:
 git commit <file name>

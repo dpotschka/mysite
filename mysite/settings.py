@@ -25,7 +25,12 @@ SECRET_KEY = '%h0=okx57_5*kwjx=a@m0*ud650zz(1qj_y-fqvh*30i)fon3@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["timetable.pythonanywhere.com"]
+
+# For local leave this blank.
+ALLOWED_HOSTS = []
+
+# This one is for pa.
+# ALLOWED_HOSTS = ["timetable.pythonanywhere.com"]
 
 
 # Application definition
@@ -127,10 +132,23 @@ USE_TZ = True
 #                |
 STATIC_URL = '/static/'
 
+"""
+The STATIC_ROOT variable in settings.py defines the single folder
+you want to collect all your static files into. Typically, this
+would be a top-level folder inside your project.
+"""
+
+# Local:
+
+STATIC_ROOT = 'c:/Daves_Python_Programs/pythonAnyWhere/mysite/myPolls/static'
+
+
+# Deploy:
 # The STATIC_ROOT on the web tab (under Static files section
 # scroll way down there) must be the same as this one.
 #/home/my-username/my-django-project/static
-STATIC_ROOT = '/home/timetable/mysite/myPolls/static'
+
+#STATIC_ROOT = '/home/timetable/mysite/myPolls/static'
 
 
 
