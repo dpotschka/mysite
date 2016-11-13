@@ -1,13 +1,11 @@
-Test sending to githup then pa. fromlocal success.
- Now editing online at github.com, will pull from pa now.
-Be sure to commit before sending or when you come back here
-nothing will have changed, but it will be different at github.
-now commit. and then send back to github then to local.
+
 
 DAvee Read these for setting up your website connections etc.
 
 All the stuff in the file is from the tutorial:
 https://docs.djangoproject.com/en/1.10/intro/tutorial01/
+
+
 
 
 1.
