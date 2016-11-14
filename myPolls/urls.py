@@ -13,6 +13,9 @@ app_name = 'myPolls'
 # The 'IndexView, DetailView and ResultsView are classes now in views.py
 # django expects the P to pass too be called <pk> for a generic as_view().
 
+# reverse is like redirect in gae.
+# If the URL accepts arguments, you may pass them in args.
+
 # See the old way below.
 # The new way:
 urlpatterns = [

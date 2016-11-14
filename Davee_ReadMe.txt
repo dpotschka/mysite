@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 
-=======
-﻿
 Davee Read these for setting up your website connections etc.
->>>>>>> ca9d41451e362ae6001b29f7f1eb71bee5c1f287
+
 
 All the stuff in the file is from the tutorials:
 
@@ -29,11 +26,19 @@ django tutorial.  If you need to reactivate it later, maybe if
 you close your bash console and open a new one, the command is:
 
 workon django17
+
+cd mysite, or where ever you app is.
+
+If you want the python shell:
+python manage.py shell
+
 --
 
 
-Set up your directory structures the same way as done in this example web site
-(mysite).
+
+
+Set up your directory structures the same way as done in this example
+web site (mysite).
 Django is set up to search all apps in one web site (mysite).  A website can
 have more than one app.
 
@@ -205,7 +210,7 @@ STATIC_URL = '/static/'
 
 See 15 below for more on these two and media files, but this is all you need for now.
 
-These get your javascrit, image, css, and fonts files. 
+These get your javascrit, image, css, and fonts files.
 # Production:
 STATIC_ROOT = '/home/timetable/mysite/myPolls/static'
 
@@ -290,18 +295,41 @@ This is where you declare your class db models.
 ---- End 10
 
 
-11.
+11.  Tests
+
+
+See the tutorial on how to access these tests from bash.
+https://docs.djangoproject.com/en/1.10/intro/tutorial05/
 
 In:
 /timetable/mysite/myPolls/tests.py
 
 Django will look here for testing from bash.  Write your own tests
 there are some in here we did for the mysite project.
-See the tutorial on how to access these tests from bash.
-https://docs.djangoproject.com/en/1.10/intro/tutorial05/
+
+# django will automatically run these tests when you run
+# 'python manage.py test myPolls' from bash /mysite
+# It sets up its own temporary db to do this.
 
 
----- End 11
+from myPolls.models import Question
+You can do that because /myPolls has __init__.py file in it.
+
+
+reverse explained:
+https://docs.djangoproject.com/en/1.10/ref/urlresolvers/#reverse
+
+from django.urls import reverse
+return HttpResponseRedirect(reverse('url_name'))
+This looks through all urls defined in your project for the url
+defined with the name url_name and returns the actual url /foo/.
+
+This means that you refer to the url only by its name attribute - if
+you want to change the url itself or the view it allows you to
+do this by editing one place only - urls.py.
+
+
+---- End 11 Tests.
 
 
 
@@ -503,6 +531,8 @@ paths in your static files as well.
 Git stuff.
 
 
+https://help.github.com/articles/pushing-to-a-remote/
+
 To get your PA files on your local machine you have to push them to
 github first (use PA bash),  You may have to pull the github files
 to PA first to integrate the two repos.
@@ -540,14 +570,23 @@ then
 git commit
 To exit (for pa) a message while doing a "git commit":
 hit <esc>
-then 
+then
 :wq and the commit will happen.
 
-To exit a message on local just save the message then close the FILE THEN close the editor.
+To exit a message on local just save the message then close the FILE THEN
+close the editor.
 
 You can also do:
 git commit <file name>
 
+To force a merge from githup.com to pa when pulling from pa.
+git merge -a
+
+git help commit -a
+using the -a switch with the commit command to automatically "add" changes
+from all known files (i.e. all files that are already listed in the index)
+and to automatically "rm" files in the index that have been removed from
+the working tree, and then perform the actual commit.
 
 More useful commands:
 Use the https if you don't have ssh,
@@ -562,7 +601,10 @@ git diff
 git push  <url>
 git pull  <url>
 
+
 for debugging
+
+git status
 git branch -a
 and
 git log
