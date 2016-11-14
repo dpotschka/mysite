@@ -13,7 +13,7 @@ import sys
 # For local.
 path = 'C:/Daves_Python_Programs/pythonAnyWhere/mysite'
 
-# For deploy on pa.
+# For production on pa.
 #path = '/home/timetable/mysite'
 
 if path not in sys.path:

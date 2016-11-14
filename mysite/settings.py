@@ -29,7 +29,7 @@ DEBUG = True
 # For local leave this blank.
 ALLOWED_HOSTS = []
 
-# This one is for pa.
+# This one is for pa production.
 # ALLOWED_HOSTS = ["timetable.pythonanywhere.com"]
 
 

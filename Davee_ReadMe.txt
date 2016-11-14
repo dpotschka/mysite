@@ -27,10 +27,36 @@ you close your bash console and open a new one, the command is:
 
 workon django17
 
-cd mysite, or where ever you app is.
+cd mysite, or where ever you app is for everything from here on.
 
 If you want the python shell:
 python manage.py shell
+
+To run the app locally (close google app engine first) then:
+python manage.py runserver
+http://localhost:8000/polls/
+
+Don't forget to change this stuff first:
+
+In:
+/timetable/mysite/mysite/settings.py
+To run locally you need leave it blank:
+ALLOWED_HOSTS = []
+# Local:
+STATIC_ROOT = 'c:/Daves_Python_Programs/pythonAnyWhere/mysite/myPolls/static'
+
+For production set
+ALLOWED_HOSTS = ["timetable.pythonanywhere.com"]
+# Production:
+STATIC_ROOT = '/home/timetable/mysite/myPolls/static'
+
+In:
+/timetable/mysite/mysite/wsgi.py
+Production set
+path = '/home/timetable/mysite'
+# For local.
+path = 'c:/Daves_Python_Programs/pythonAnyWhere/mysite'
+
 
 --
 
@@ -627,5 +653,35 @@ You can suppress this message by setting them explicitly:
 
 
 
+18.  Re-using your myPolls app as a django/python package.
 
+
+I did this locally and it worked.  Follow the tutorial here:
+https://docs.djangoproject.com/en/1.10/intro/reusable-apps/
+
+Some changes you must do:
+A few things to django-myPolls/setup.py there are instructions in that file.
+
+When you pip install the package it goes into c:/Python27/site-packages/lib/myPolls 
+which is correct.  I noticed that the directory lib is not in alphabetical order.
+Anyway, when you pip install, you must be in 
+c:/Daves_Python_Programs/pythonAnyWhere/mysite
+then 
+pip install c:/Daves_Python_Programs/pythonAnywhere/django-myPolls/dist/django-myPolls-0.1.zip
+
+You will also have to run the server again.
+
+I have unistalled it again and put things back to normal 
+so that my local site is still the same as pa.
+I will leave the /django-myPolls though so you don't have to go through the entire 
+tutorial again.  Although you will have to delete myPolls from /mysite if you want
+to do the tutorial again etc.  just start from the beginning of the tutorial again
+and follow along and figure it out agian, it was pretty easy the first time.
+
+
+
+
+
+
+-------------------- End 18.  Re-using your myPolls app as a django/python package.
 
