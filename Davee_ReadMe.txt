@@ -28,6 +28,7 @@ you close your bash console and open a new one, the command is:
 workon django17
 
 cd mysite, or where ever you app is for everything from here on.
+That is where the manage.py is.
 
 If you want the python shell:
 python manage.py shell
@@ -63,15 +64,14 @@ python manage.py collectstatic  see 16 if you don't want to.
 --
 
 
-
-
 Set up your directory structures the same way as done in this example
 web site (mysite).
 Django is set up to search all apps in one web site (mysite).  A website can
 have more than one app.
 
 You need to nest your templates down so that Django doesn't grab templates
-from one of your other apps.
+from one of your other apps.  Same with static files.
+https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 like you have here:
 /mysite/myPolls/templates/myPolls/index.html
@@ -80,13 +80,16 @@ mysite is your website and myPolls is an application in that website.
 
 --
 
+You have two template directories (one for myPolls)
+https://www.pythonanywhere.com/user/timetable/files/home/timetable
+    /mysite/myPolls/templates/myPolls
+has detail.html, index.html and results.html and that's all in it.
 
-To format the html of your admin page
-
-You have two template directories one is for admin.py and is found at:
+and a second template folder here (to format the html of your admin page)
 https://www.pythonanywhere.com/user/timetable/files/home/timetable/mysite
-   /templates/admin
-I also had to create that admin directory.  According to the tutorial.
+   /templates/admin/base_site.html
+Which is driven by /mysite/myPolls/admin.py
+I also had to create that admin directory.  According to the tutorial 7.
 
 You also have two admin directories,
 the second one is for static files and is in:
@@ -98,16 +101,18 @@ copy the template admin/base_site.html from within the
 default Django admin template directory in the source code
 "of Django itself (django/contrib/admin/templates) into that directory.
 
-You must enter this url to get that file:
+You must enter this url to get that file, it is hidden:
 https://www.pythonanywhere.com/user/timetable/files/usr/local/lib/python2.7/dist-packages/django/contrib/admin/templates/admin
 
 I got it here already:
 <!--
 {% extends "admin/base.html" %} {% block title %}
-{{ title }} | {{ site_title|default:_('Daves site admin') }}{% endblock %}
+{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
 
 {% block branding %}
-{{ site_header|default:_('Daves administration') }}
+
+to get your own title, delete this entire next line and type in what ever uwant.
+{{ site_header|default:_('Django administration') }}
 
 {% endblock %} {% block nav-global %}{% endblock %}
 -->
@@ -115,13 +120,20 @@ I got it here already:
 change it to this:
 
 {% extends "admin/base.html" %}
-{% block title %}{{ title }} | {{ site_title|default:_('Daves site admin') }}
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}
 {% endblock %}
 
 {% block branding %}
 Dave is a cool administrator
 
 {% endblock %} {% block nav-global %}{% endblock %}
+
+
+CAUTION: The tutorial 7 says to get the index.html file as well from the
+above hidden url, but when you put that index.html file in this dir
+/mysite/templates/admin/ it fucks shit up.  I think django is doing this
+for us now in the background somewhere.  So I just got rid of that file
+and now everything works great.
 
 
 then,
@@ -139,7 +151,11 @@ TEMPLATES = [
 
 
 We'll discuss in more detail in the reusable apps tutorial why we do this
-multiple template and admin directories.
+multiple template and admin directories.  It's so we can turn
+myPolls into a package and store it in python27/site-packages/lib
+We want the package functionality to be seperate from mysite.  See 18
+below.  I did the package thing it works great but you can't do it
+online because pa controls which packages go into /lib
 https://docs.djangoproject.com/en/1.10/intro/reusable-apps/
 
 
@@ -667,42 +683,42 @@ https://docs.djangoproject.com/en/1.10/intro/reusable-apps/
 Some changes you must do:
 A few things to django-myPolls/setup.py there are instructions in that file.
 
-When you pip install the package it goes into c:/Python27/site-packages/lib/myPolls 
+When you pip install the package it goes into c:/Python27/site-packages/lib/myPolls
 which is correct.  I noticed that the directory lib is not in alphabetical order.
 Anyway, when you pip install, you must be in or not?
 c:/Daves_Python_Programs/pythonAnyWhere/mysite
 
 then I moved the zip file so it would be less typing
-pip install c:/django-myPolls-0.1.zip  or the old location, it is still in there 
+pip install c:/django-myPolls-0.1.zip  or the old location, it is still in there
 pip install c:/Daves_Python_Programs/pythonAnywhere/django-myPolls/dist/django-myPolls-0.1.zip
 
 You will also have to run the server again.
 
-I have unistalled it again and put things back to normal 
+I have unistalled it again and put things back to normal
 so that my local site is still the same as pa.
-I will leave the /django-myPolls though so you don't have to go through the entire 
+I will leave the /django-myPolls though so you don't have to go through the entire
 tutorial again.  All you will have to do is delete myPolls from /mysite if you want
-to put myPolls back into the python lib as a package.  Just do pip install..  
+to put myPolls back into the python lib as a package.  Just do pip install..
 
 
 More things you must do:
 
 see /django_myPolls.egg-info/PKG-INFO for more setup info.
-/django-myPolls/README.rst they are similar.  I created them 
+/django-myPolls/README.rst they are similar.  I created them
 from the tutorial.
 
 In /mysite/mysite/settings.py
 
 INSTALLED_APPS = [
-    change this next bit 
+    change this next bit
     'myPolls.apps.MypollsConfig',
-	To 
+	to
 	'myPolls',
 
 CAUTION:
-Application labels (that is, the final part of the dotted path to 
-application packages) must be unique in INSTALLED_APPS. Avoid 
-using the same label as any of the Django contrib packages, 
+Application labels (that is, the final part of the dotted path to
+application packages) must be unique in INSTALLED_APPS. Avoid
+using the same label as any of the Django contrib packages,
 for example auth, admin, or messages.
 
 
@@ -716,7 +732,7 @@ urlpatterns = [
 Quick start (In summary Davee)
 -----------
 
-1. Add "myPolls" to your INSTALLED_APPS setting 
+1. Add "myPolls" to your INSTALLED_APPS setting
 
 (mysite/mysite/settings.py) like this::
 
@@ -730,7 +746,7 @@ Quick start (In summary Davee)
     url(r'^myPolls/', include('myPolls.urls')),
 
 3. Run `python manage.py migrate` to create the myPolls models.
-I didn't do number 3 and it still worked.  Because the db is holding state 
+I didn't do number 3 and it still worked.  Because the db is holding state
 for git pull probably.
 
 4. Start the development server and visit http://127.0.0.1:8000/admin/
@@ -739,18 +755,27 @@ for git pull probably.
 5. Visit http://127.0.0.1:8000/myPolls/ to participate in the poll.
 
 
+https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 Try altering (mysite/mysite/settings.py) :
-STATIC_ROOT = 'c:/Daves_Python_Programs/pythonAnyWhere/mysite/myPolls/static' 
+STATIC_ROOT = 'c:/Daves_Python_Programs/pythonAnyWhere/mysite/myPolls/static'
 
 change it to (DONE it still works)
-STATIC_ROOT = os.path.join(BASE_DIR, "static") 
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 or get rid of it.  (DONE it still works without the static root)
 AND
 There is no STATIC_ROOT when you first create a new project.
 
+CAUTION: It may still work because you are not using any static files.
 
 
--------------------- End 18.  Re-using your myPolls app as a django/python package.
+----------- End 18.  Re-using your myPolls app as a django/python package.
+
+
+
+
+
+
+
 

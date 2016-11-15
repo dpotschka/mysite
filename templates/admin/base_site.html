@@ -1,10 +1,33 @@
 
 
 {% extends "admin/base.html" %}
-{% block title %}{{ title }} | {{ site_title|default:_('Daves site admin') }}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'myPolls/style.css' %}" />
+
+
+
+{% block title %}
+    {{ title }} | {{ site_title|default:_('Django site admin') }}
 {% endblock %}
 
-{% block branding %}
-Dave is a cool administrator
 
-{% endblock %} {% block nav-global %}{% endblock %}
+{% block branding %}
+
+<style>
+p {color:green;}
+</style>
+
+<p> Dave wants blue</p>
+
+    Dave is a cool administrator, this file gets screwed up when
+    /mysite/templates/admin/index.html
+    is running so I changed the name of index.html to fucksShitUpOldIndex.html
+    or something like that so it doesn't get accessed.  It looks like
+    this file is the index now for the overall administration.
+    myPolls has its own admin and is tagged on underneath this one.
+
+{% endblock %}
+
+{% block nav-global %}
+{% endblock %}
