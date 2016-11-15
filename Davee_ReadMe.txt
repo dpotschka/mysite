@@ -57,6 +57,8 @@ path = '/home/timetable/mysite'
 # For local.
 path = 'c:/Daves_Python_Programs/pythonAnyWhere/mysite'
 
+Don't forget to run this everytime you add a static file:
+python manage.py collectstatic  see 16 if you don't want to.
 
 --
 
@@ -656,6 +658,9 @@ You can suppress this message by setting them explicitly:
 18.  Re-using your myPolls app as a django/python package.
 
 
+This will NOT work online at pa because they won't allow you to add a
+package to python/sit-packages/lib, you must ask them to add packages.
+
 I did this locally and it worked.  Follow the tutorial here:
 https://docs.djangoproject.com/en/1.10/intro/reusable-apps/
 
@@ -664,9 +669,11 @@ A few things to django-myPolls/setup.py there are instructions in that file.
 
 When you pip install the package it goes into c:/Python27/site-packages/lib/myPolls 
 which is correct.  I noticed that the directory lib is not in alphabetical order.
-Anyway, when you pip install, you must be in 
+Anyway, when you pip install, you must be in or not?
 c:/Daves_Python_Programs/pythonAnyWhere/mysite
-then 
+
+then I moved the zip file so it would be less typing
+pip install c:/django-myPolls-0.1.zip  or the old location, it is still in there 
 pip install c:/Daves_Python_Programs/pythonAnywhere/django-myPolls/dist/django-myPolls-0.1.zip
 
 You will also have to run the server again.
@@ -674,12 +681,74 @@ You will also have to run the server again.
 I have unistalled it again and put things back to normal 
 so that my local site is still the same as pa.
 I will leave the /django-myPolls though so you don't have to go through the entire 
-tutorial again.  Although you will have to delete myPolls from /mysite if you want
-to do the tutorial again etc.  just start from the beginning of the tutorial again
-and follow along and figure it out agian, it was pretty easy the first time.
+tutorial again.  All you will have to do is delete myPolls from /mysite if you want
+to put myPolls back into the python lib as a package.  Just do pip install..  
+
+
+More things you must do:
+
+see /django_myPolls.egg-info/PKG-INFO for more setup info.
+/django-myPolls/README.rst they are similar.  I created them 
+from the tutorial.
+
+In /mysite/mysite/settings.py
+
+INSTALLED_APPS = [
+    change this next bit 
+    'myPolls.apps.MypollsConfig',
+	To 
+	'myPolls',
+
+CAUTION:
+Application labels (that is, the final part of the dotted path to 
+application packages) must be unique in INSTALLED_APPS. Avoid 
+using the same label as any of the Django contrib packages, 
+for example auth, admin, or messages.
+
+
+In /mysite/mysite/urls.py you must
+
+Include the myPolls URLconf in your project urls.py like this:
+urlpatterns = [
+    url(r'^myPolls/', include('myPolls.urls')),...
+
+
+Quick start (In summary Davee)
+-----------
+
+1. Add "myPolls" to your INSTALLED_APPS setting 
+
+(mysite/mysite/settings.py) like this::
+
+    INSTALLED_APPS = [
+        ...
+        'myPolls',
+    ]
+
+2. Include the polls URLconf in your project urls.py like this::
+
+    url(r'^myPolls/', include('myPolls.urls')),
+
+3. Run `python manage.py migrate` to create the myPolls models.
+I didn't do number 3 and it still worked.  Because the db is holding state 
+for git pull probably.
+
+4. Start the development server and visit http://127.0.0.1:8000/admin/
+   to create a poll (you'll need the Admin app enabled).
+
+5. Visit http://127.0.0.1:8000/myPolls/ to participate in the poll.
 
 
 
+Try altering (mysite/mysite/settings.py) :
+STATIC_ROOT = 'c:/Daves_Python_Programs/pythonAnyWhere/mysite/myPolls/static' 
+
+change it to (DONE it still works)
+STATIC_ROOT = os.path.join(BASE_DIR, "static") 
+
+or get rid of it.  (DONE it still works without the static root)
+AND
+There is no STATIC_ROOT when you first create a new project.
 
 
 
