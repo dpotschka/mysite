@@ -13,7 +13,21 @@ p {color:green;}
 
     <ul>
 
-    {% for question in latest_question_list %}
+    {% for Duestion in latest_question_list %}
+
+<!--  <li><a href="/myPolls/1/">What&#39;s up?</a></li>  --> 
+<li><a href="{% url 'myPolls:detail' Duestion.id %}">{{ Duestion.question_text }}</a></li>
+
+
+    {% endfor %}
+
+    </ul>
+
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+
 
 <!--
 Using the url tag var in an html file.
@@ -33,17 +47,8 @@ app_name = myPolls.
 # The question.id comes from the for loop above though.
 -->
 
-<li><a href="{% url 'myPolls:detail' question.id %}">{{ question.question_text }}</a></li>
-
 <!--
 The old way.
 <li><a href="/myPolls/{{ question.id }}/">{{ question.question_text }}</a></li>
 -->
 
-    {% endfor %}
-
-    </ul>
-
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}

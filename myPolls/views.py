@@ -49,13 +49,44 @@ class IndexView(generic.ListView):
         ).order_by('-pub_date')[:5]
 
 
+"""
+In previous parts of the tutorial, the templates have been
+provided with a context that contains the question and
+latest_question_list context variables. For DetailView
+the question variable is provided automatically - since
 
+we're using a Django model (Question), Django is able to
+determine an appropriate name for the context variable (ie Davee 'question').
+
+I am going to over-ride that because it is a dumb idea (very confusing).
+  I have added
+context_object_name = 'latest'
+
+The original class DetailView had no such declaration yet django was 
+able to find 'question' var in the detail.html file.
+
+However, for ListView, the automatically generated context
+variable is question_list. To override this we provide the
+
+context_object_name attribute, specifying that we want to use
+latest_question_list instead (as it is named in our index.html file).
+As an alternative approach, you
+could change your templates to match the new default context
+variables - but it's a lot easier to just tell Django to
+use the variable you want.
+"""
 
 class DetailView(generic.DetailView):
     # The db to use in the template.
-    model = Question
-    template_name = 'myPolls/detail.html'
+    #model = Question
+    
+    template_name = 'myPolls/detail.html' 
 
+# I add this here and to the detail.html file although everything worked
+# before with out it!  Your default var had to be all lowercase 'question'.
+# This is also used by the vote() to pass vars.
+    context_object_name = 'latest'
+    
     def get_queryset(self):
         """
         Excludes any questions that aren't published yet.
@@ -65,9 +96,7 @@ class DetailView(generic.DetailView):
 
 
 """
-It looks like this function runs when class DetailView runs because
-detail.html references it in the form and class DetailView inherits the
-fuctionality form 'generic.DetailView' import.
+This is what the form runs at detail.html
 """
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
@@ -76,7 +105,7 @@ def vote(request, question_id):
     except (KeyError, Choice.DoesNotExist):
         # Redisplay the question voting form.
         return render(request, 'myPolls/detail.html', {
-            'question': question,
+            'latest': question,
             'error_message': "You didn't select a choice.",
         })
     else:
