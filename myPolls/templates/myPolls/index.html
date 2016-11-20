@@ -1,0 +1,49 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'myPolls/style.css' %}" />
+
+<style>
+p {color:green;}
+</style>
+
+<p> Dave wants blue</p>
+
+
+{% if latest_question_list %}
+
+    <ul>
+
+    {% for question in latest_question_list %}
+
+<!--
+Using the url tag var in an html file.
+myPolls is the nameSpace as defined in mysite/myPolls/urls.py
+app_name = myPolls.
+
+# 'myPolls:index' refers to /myPolls/url.py name = 'index'
+        """
+        urlpatterns = [
+            url(r'^$', views.IndexView.as_view(), name='index'),
+            url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view...
+        """
+
+# reverse is like redirect in gae.
+# If the URL accepts arguments, you may pass them in args.
+# Like above the regexp is an args.
+# The question.id comes from the for loop above though.
+-->
+
+<li><a href="{% url 'myPolls:detail' question.id %}">{{ question.question_text }}</a></li>
+
+<!--
+The old way.
+<li><a href="/myPolls/{{ question.id }}/">{{ question.question_text }}</a></li>
+-->
+
+    {% endfor %}
+
+    </ul>
+
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
