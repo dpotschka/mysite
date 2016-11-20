@@ -27,10 +27,10 @@ DEBUG = True
 
 
 # For local leave this blank also works on production.
-#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = []
 
 # This one is for pa production.
-ALLOWED_HOSTS = ["timetable.pythonanywhere.com"]
+#ALLOWED_HOSTS = ["timetable.pythonanywhere.com"]
 
 
 # Application definition
