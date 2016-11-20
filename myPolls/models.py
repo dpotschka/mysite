@@ -14,7 +14,8 @@ class Question(models.Model):
     #                               'date published'
     pub_date = models.DateTimeField('date published')
 
-    # returns a string instead of a reference to an object
+    # returns a string instead of a reference to an object.
+    # You also need this for the decorator above.
     def __str__(self):
         return self.question_text
 

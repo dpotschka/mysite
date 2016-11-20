@@ -1,8 +1,12 @@
 
 
-
+<!-- This is from the vote(),
+question = get_object_or_404(Question, pk=question_id)
+-->
 <h1>{{ question.question_text }}</h1>
 
+<!-- This is returnd from handler vote()
+-->
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <form action="{% url 'myPolls:vote' question.id %}" method="post">

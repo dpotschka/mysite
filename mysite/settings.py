@@ -75,7 +75,8 @@ TEMPLATES = [
 # this references our /mysite/templates/admin/base_site.html
 # I deleted index.html it was fucking shit up.  I changed the name so
 # it doesn't get accessed anymore, it must be depricated or something.
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        #'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

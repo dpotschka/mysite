@@ -8,8 +8,15 @@ This one is for setting up deploy on pa and use in conjuction with the
 one below.
 pythonAnywhere Django docs.
 https://help.pythonanywhere.com/pages/FollowingTheDjangoTutorial
+In that file where you see this;
+mkvirtualenv django17 --python=/usr/bin/python3.4
+I used this intsead;
+mkvirtualenv django17 --python=/usr/bin/python2.7
+I got some ssl error messages regarding urllib3 but I
+think I will be using urllib2.
+Installed django 1.10.3
 
-This one is for setting up locally.
+This one is for setting up locally and on production, most of it.
 Official Django website docs.
 https://docs.djangoproject.com/en/1.10/intro/tutorial01/
 
@@ -20,6 +27,7 @@ https://docs.djangoproject.com/en/1.10/intro/tutorial01/
 
 
 1.
+
 
 Always make sure your virtualenv is active when working on the
 django tutorial.  If you need to reactivate it later, maybe if
@@ -61,6 +69,8 @@ path = 'c:/Daves_Python_Programs/pythonAnyWhere/mysite'
 Don't forget to run this everytime you add a static file:
 python manage.py collectstatic  see 16 if you don't want to.
 
+This gets your db sqlite3, it is in the pa docs above.
+python manage.py migrate
 --
 
 

@@ -28,7 +28,15 @@ from django.views import generic
 
 
 class IndexView(generic.ListView):
+    """ context_object_name, template_name and get_queryset() are all
+    django dependant.  They all work together to pass info to the
+    index.html.  You can pass whatever you want.
+    """
+
     template_name = 'myPolls/index.html'
+
+# Use the  context_object_name 'latest_question_list' to pass the
+# db rows/field/object returned from the get_queryset() to index.html
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
@@ -41,7 +49,10 @@ class IndexView(generic.ListView):
         ).order_by('-pub_date')[:5]
 
 
+
+
 class DetailView(generic.DetailView):
+    # The db to use in the template.
     model = Question
     template_name = 'myPolls/detail.html'
 
@@ -52,11 +63,12 @@ class DetailView(generic.DetailView):
         return Question.objects.filter(pub_date__lte=timezone.now())
 
 
-class ResultsView(generic.DetailView):
-    model = Question
-    template_name = 'myPolls/results.html'
 
-
+"""
+It looks like this function runs when class DetailView runs because
+detail.html references it in the form and class DetailView inherits the
+fuctionality form 'generic.DetailView' import.
+"""
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
@@ -76,6 +88,16 @@ def vote(request, question_id):
 # If the URL accepts arguments a regexp say,
 # you may pass them in args.
         return HttpResponseRedirect(  reverse( 'myPolls:results', args=(question.id,) )  )
+
+
+
+class ResultsView(generic.DetailView):
+    model = Question
+    template_name = 'myPolls/results.html'
+
+
+
+
 
 
 """
